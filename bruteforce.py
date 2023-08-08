@@ -58,8 +58,14 @@ def main():
 
     selected_actions = maximize_profit(actions_dict, money_in_cents)
     print("Selected actions:")
+    total_cost = 0
+    total_profit = 0
     for action in selected_actions:
-        print(f"Name: {action['name']}, Cost: {action['cost']}, Profit: {action['profit']}")
+        print(f"Name: {action['name']}, Cost: {action['cost']}")
+        total_cost += action['cost']
+        total_profit += action['profit']
+
+    print(f"Total Cost: {total_cost / 100}, Total Profit: {total_profit / 100}")
 
 
 if __name__ == "__main__":
