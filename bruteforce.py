@@ -2,28 +2,17 @@ import csv
 
 def create_dict():
     actions_dict = []
-    actions_name = []
-    actions_cost = []
-    actions_profit = []
 
-    with open ('data/forcebrute.csv', 'r') as csvfile:
+    with open('data/forcebrute.csv', 'r') as csvfile:
         csv_reader = csv.reader(csvfile, delimiter=',')
         next(csv_reader, None)
         for row in csv_reader:
-            actions_name.append(row[0])
-            actions_cost.append(row[1])
-            actions_profit.append(row[2])
+            name = row[0]
+            cost = int(float(row[1]) * 100)
+            profit = float(row[2])
+            if cost > 0 and profit > 0:
+                actions_dict.append({"name": name, "cost": cost, "profit": int(cost * profit)})
 
-    for i in range(len(actions_cost)):
-        action_cost = float(actions_cost[i])
-        actions_cost[i] = int(action_cost * 100)
-
-    for i in range (len(actions_profit)):
-        actions_profit[i] = float(actions_profit[i])
-
-    for i in range (len(actions_name)):
-        if actions_cost[i] and actions_profit[i] > 0:
-            actions_dict.append({"name": actions_name[i], "cost": actions_cost[i], "profit": int((actions_cost[i] * actions_profit[i]) / 100)})
     return actions_dict
 
 def maximize_profit(actions_dict, money_in_cents):
@@ -65,7 +54,7 @@ def main():
         total_cost += action['cost']
         total_profit += action['profit']
 
-    print(f"Total Cost: {total_cost / 100}, Total Profit: {total_profit / 100}")
+    print(f"Total Cost: {total_cost / 100}, Total Profit: {total_profit / 10000}")
 
 
 if __name__ == "__main__":
